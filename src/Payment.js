@@ -33,6 +33,8 @@ function Payment() {
         getClientSecret()
     },[basket]);
 
+    console.log(clientSecret)
+
     const handleSubmit=async (event)=>{
         event.preventDefault();
         setProcessing(true);
@@ -43,7 +45,11 @@ function Payment() {
         }).then(({paymentIntent})=>{
             setSucceeded(true);
             setError(null);
-            setProcessing(false);
+            setProcessing(true);
+
+            dispatch({
+                type:"EMPTY_BASKET"
+            })
 
             history.replaceState("/orders");
         })
